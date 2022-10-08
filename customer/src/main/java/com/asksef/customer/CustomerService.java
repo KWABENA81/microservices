@@ -1,15 +1,15 @@
-package com.amigoscode.customer;
+package com.asksef.customer;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
-public class CustomerService {
+//@AllArgsConstructor
+public record CustomerService() {
 
-    private final CustomerRepository customerRepository;
-    private final FraudClient fraudClient;
-    private final RabbitMQMessageProducer rabbitMQMessageProducer;
+    //  private final CustomerRepository customerRepository;
+//    private final FraudClient fraudClient;
+//    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -17,16 +17,16 @@ public class CustomerService {
                 .lastName(request.lastName())
                 .email(request.email())
                 .build();
-        // todo: check if email valid
-        // todo: check if email not taken
-        customerRepository.saveAndFlush(customer);
-
-        FraudCheckResponse fraudCheckResponse =
-                fraudClient.isFraudster(customer.getId());
-
-        if (fraudCheckResponse.isFraudster()) {
-            throw new IllegalStateException("fraudster");
-        }
+//        // todo: check if email valid
+//        // todo: check if email not taken
+//        customerRepository.saveAndFlush(customer);
+//
+//        FraudCheckResponse fraudCheckResponse =
+//                fraudClient.isFraudster(customer.getId());
+//
+//        if (fraudCheckResponse.isFraudster()) {
+//            throw new IllegalStateException("fraudster");
+//        }
 
 //        NotificationRequest notificationRequest = new NotificationRequest(
 //                customer.getId(),
@@ -40,8 +40,8 @@ public class CustomerService {
 //                "internal.notification.routing-key"
 //        );
 
+        // }
     }
-}
 //public record CustomerService(CustomerRepository customerRepository) {
 //    public void registerCustomer(CustomerRegistrationRequest request) {
 //        Customer customer = Customer.builder()
@@ -51,4 +51,4 @@ public class CustomerService {
 //
 //        customerRepository.save(customer);
 //    }
-//}
+}
